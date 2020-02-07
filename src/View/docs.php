@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Swagger UI</title>
+    <title>Bone Framework API</title>
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700"
           rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/open-api/docs/swagger-ui.css">
@@ -75,7 +75,7 @@
 
         // Build a system
         const ui = SwaggerUIBundle({
-            url: "/docs/api.json",
+            url: "/api/docs.json",
             dom_id: '#swagger-ui',
             deepLinking: true,
             presets: [

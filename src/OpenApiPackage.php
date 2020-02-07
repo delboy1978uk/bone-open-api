@@ -54,7 +54,7 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
      */
     public function addRoutes(Container $c, Router $router)
     {
-        $router->map('GET', '/docsx', [ApiDocsController::class, 'apiDocsAction']);
-        $router->map('GET', '/docs/api.json', [ApiDocsController::class, 'apiAction']);
+        $router->map('GET', '/api/docs', [ApiDocsController::class, 'apiDocsAction']);
+        $router->map('GET', '/api/docs.json', [ApiDocsController::class, 'apiAction']);
     }
 }

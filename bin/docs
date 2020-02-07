@@ -31,29 +31,12 @@ if (!file_exists('vendor/autoload.php')) {
 require_once 'vendor/autoload.php';
 
 use Bone\ConsoleApplication;
-use Bone\OAuth2\Entity\OAuthUser;
-use Bone\OAuth2\Repository\ScopeRepository;
-use Bone\OAuth2\Service\ClientService;
-use Del\Console\UserCommand;
-use Bone\OAuth2\Command\ClientCommand;
-use Bone\OAuth2\Command\ClientScopeCommand;
-use Bone\OAuth2\Command\ScopeCreateCommand;
-use Bone\OAuth2\Command\ScopeListCommand;
-use Del\Service\UserService;
-
+use Bone\OpenApi\Console\DocGeneratorCommand;
 
 $container = Bone\Mvc\Application::ahoy()->bootstrap();
-
-// Override the Del\Entity\User with our OAuth user class
-/** @var UserService $userService */
-$userService = $container[UserService::class];
-$userService->setUserClass(OAuthUser::class);
-
-// Set up the application
+$packages = $container->get('packages');
 $app = new ConsoleApplication();
-
-$userCommand = new UserCommand($userService);
-
-$app->add($userCommand);
-
+$command = new DocGeneratorCommand($packages);
+$app->add($command);
 $app->run();
+

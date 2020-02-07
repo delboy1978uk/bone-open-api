@@ -21,3 +21,20 @@ return [
     // ...
 ];
 ```
+Create a config array entry/file.
+```php
+<?php
+
+return [
+    'docs' => 'data/docs/api.json',
+];
+```
+Run booty to deploy the front end assets.
+```
+booty deploy
+```
+Scan for your API annotations.
+```
+docs generate
+```
+Now you can head to `/api/docs` to view your API documentation. 😃
