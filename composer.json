@@ -14,6 +14,9 @@
     "require-dev": {
         "roave\/security-advisories": "dev-master"
     },
+    "bin": [
+        "bin/docs"
+    ],
     "autoload": {
         "psr-4": {
             "Bone\\OpenApi\\": "src\/"

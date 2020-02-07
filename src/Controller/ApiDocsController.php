@@ -5,10 +5,25 @@ namespace Bone\OpenApi\Controller;
 use Bone\Mvc\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;;
+use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
+
+;
 
 class ApiDocsController extends Controller
 {
+    /** @var string $docJsonPath */
+    private $docJsonPath;
+
+    /**
+     * ApiDocsController constructor.
+     * @param string $docJsonPath
+     */
+    public function __construct(string $docJsonPath)
+    {
+        $this->docJsonPath = $docJsonPath;
+    }
+
     /**
      * @param ServerRequestInterface $request
      * @param array $args
@@ -19,5 +34,18 @@ class ApiDocsController extends Controller
         $body = $this->getView()->render('open-api::docs', []);
 
         return new HtmlResponse($body);
+    }
+    
+    /**
+     * @param ServerRequestInterface $request
+     * @param array $args
+     * @return ResponseInterface
+     */
+    public function apiAction(ServerRequestInterface $request, array $args): ResponseInterface
+    {
+        $json = file_get_contents($this->docJsonPath);
+        $data = json_decode($json, true);
+
+        return new JsonResponse($data);
     }
 }

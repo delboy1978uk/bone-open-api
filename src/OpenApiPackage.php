@@ -6,9 +6,12 @@ namespace Bone\OpenApi;
 
 use Barnacle\Container;
 use Barnacle\RegistrationInterface;
+use Bone\Mvc\Controller\Init;
 use Bone\Mvc\Router\RouterConfigInterface;
 use Bone\Mvc\View\PlatesEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
+use BoneMvc\Mail\Service\MailService;
+use BoneMvc\Module\BoneMvcUser\Controller\BoneMvcUserController;
 use League\Route\Router;
 
 class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
@@ -21,6 +24,12 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
         /** @var PlatesEngine $viewEngine */
         $viewEngine = $c->get(PlatesEngine::class);
         $viewEngine->addFolder('open-api', __DIR__ . '/View/');
+
+        $c[ApiDocsController::class] = $c->factory(function (Container $c) {
+            $docJsonPath = $c->has('docs') ? $c->get('docs') : 'data/docs/api.json';
+            
+            return  Init::controller(new ApiDocsController($docJsonPath), $c);
+        });
     }
 
     /**
@@ -45,6 +54,7 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
      */
     public function addRoutes(Container $c, Router $router)
     {
-        $router->map('GET', '/docs', [ApiDocsController::class, 'apiDocsAction']);
+        $router->map('GET', '/docsx', [ApiDocsController::class, 'apiDocsAction']);
+        $router->map('GET', '/docs/api.json', [ApiDocsController::class, 'apiAction']);
     }
 }
