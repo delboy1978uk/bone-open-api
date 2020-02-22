@@ -7,12 +7,12 @@ namespace Bone\OpenApi;
 use Barnacle\Container;
 use Barnacle\RegistrationInterface;
 use Bone\Mvc\Controller\Init;
+use Bone\Mvc\Router;
 use Bone\Mvc\Router\RouterConfigInterface;
 use Bone\Mvc\View\PlatesEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
 use BoneMvc\Mail\Service\MailService;
 use BoneMvc\Module\BoneMvcUser\Controller\BoneMvcUserController;
-use League\Route\Router;
 
 class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
 {
