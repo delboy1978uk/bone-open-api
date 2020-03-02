@@ -6,9 +6,9 @@ namespace Bone\OpenApi;
 
 use Barnacle\Container;
 use Barnacle\RegistrationInterface;
-use Bone\Mvc\Controller\Init;
+use Bone\Controller\Init;
 use Bone\Mvc\Router;
-use Bone\Mvc\Router\RouterConfigInterface;
+use Bone\Router\RouterConfigInterface;
 use Bone\View\PlatesEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
 use BoneMvc\Mail\Service\MailService;

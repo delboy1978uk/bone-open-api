@@ -2,7 +2,7 @@
 
 namespace Bone\OpenApi\Controller;
 
-use Bone\Mvc\Controller;
+use Bone\Controller\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
