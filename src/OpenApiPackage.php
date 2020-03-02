@@ -8,7 +8,7 @@ use Barnacle\Container;
 use Barnacle\RegistrationInterface;
 use Bone\Controller\Init;
 use Bone\Router\Router;
-use Bone\Router\Router;ConfigInterface;
+use Bone\Router\RouterConfigInterface;
 use Bone\View\PlatesEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
 use BoneMvc\Mail\Service\MailService;
