@@ -9,7 +9,7 @@ use Barnacle\RegistrationInterface;
 use Bone\Controller\Init;
 use Bone\Router\Router;
 use Bone\Router\RouterConfigInterface;
-use Bone\View\PlatesEngine;
+use Bone\View\ViewEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
 use BoneMvc\Mail\Service\MailService;
 use BoneMvc\Module\BoneMvcUser\Controller\BoneMvcUserController;
@@ -21,8 +21,8 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
      */
     public function addToContainer(Container $c)
     {
-        /** @var PlatesEngine $viewEngine */
-        $viewEngine = $c->get(PlatesEngine::class);
+        /** @var ViewEngine $viewEngine */
+        $viewEngine = $c->get(ViewEngine::class);
         $viewEngine->addFolder('open-api', __DIR__ . '/View/');
 
         $c[ApiDocsController::class] = $c->factory(function (Container $c) {
