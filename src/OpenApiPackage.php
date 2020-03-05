@@ -11,8 +11,8 @@ use Bone\Router\Router;
 use Bone\Router\RouterConfigInterface;
 use Bone\View\ViewEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
-use BoneMvc\Mail\Service\MailService;
-use BoneMvc\Module\BoneMvcUser\Controller\BoneMvcUserController;
+use Bone\Mail\Service\MailService;
+use Bone\User\Controller\BoneUserController;
 
 class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
 {
