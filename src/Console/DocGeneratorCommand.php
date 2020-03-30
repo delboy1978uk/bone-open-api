@@ -64,5 +64,7 @@ class DocGeneratorCommand extends Command
         $json = $openapi->toJson();
         file_put_contents($destination, $json);
         $output->writeln($destination . ' generated.');
+
+        return 0;
     }
 }
