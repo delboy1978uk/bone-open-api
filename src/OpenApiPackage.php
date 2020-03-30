@@ -15,8 +15,9 @@ use Bone\View\ViewEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
 use Bone\Mail\Service\MailService;
 use Bone\User\Controller\BoneUserController;
+use Del\Booty\AssetRegistrationInterface;
 
-class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, CommandRegistrationInterface
+class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, CommandRegistrationInterface, AssetRegistrationInterface
 {
     /**
      * @param Container $c
@@ -56,4 +57,16 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
 
         return [$command];
     }
+
+    /**
+     * @return array
+     */
+    public function getAssetFolders(): array
+    {
+        return [
+            'docs' => dirname(__DIR__) . 'data/assets',
+        ];
+    }
+
+
 }
