@@ -6,7 +6,9 @@ namespace Bone\OpenApi;
 
 use Barnacle\Container;
 use Barnacle\RegistrationInterface;
+use Bone\Console\CommandRegistrationInterface;
 use Bone\Controller\Init;
+use Bone\OpenApi\Console\DocGeneratorCommand;
 use Bone\Router\Router;
 use Bone\Router\RouterConfigInterface;
 use Bone\View\ViewEngine;
@@ -14,7 +16,7 @@ use Bone\OpenApi\Controller\ApiDocsController;
 use Bone\Mail\Service\MailService;
 use Bone\User\Controller\BoneUserController;
 
-class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
+class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, CommandRegistrationInterface
 {
     /**
      * @param Container $c
@@ -33,22 +35,6 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
     }
 
     /**
-     * @return string
-     */
-    public function getEntityPath(): string
-    {
-        return '';
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasEntityPath(): bool
-    {
-        return false;
-    }
-
-    /**
      * @param Container $c
      * @param Router $router
      */
@@ -56,5 +42,18 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface
     {
         $router->map('GET', '/api/docs', [ApiDocsController::class, 'apiDocsAction']);
         $router->map('GET', '/api/docs.json', [ApiDocsController::class, 'apiAction']);
+    }
+
+    /**
+     * @param Container $container
+     * @return array
+     */
+    public function registerConsoleCommands(Container $container): array
+    {
+        $packages = $container->get('packages');
+        $command = new DocGeneratorCommand($packages);
+        $command->setName('docs:generate');
+
+        return [$command];
     }
 }
