@@ -64,7 +64,7 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
     public function getAssetFolders(): array
     {
         return [
-            'docs' => dirname(__DIR__) . '/data/assets',
+            'docs' => dirname(__DIR__) . '/data/assets/docs',
         ];
     }
 
