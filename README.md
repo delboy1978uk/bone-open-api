@@ -21,13 +21,18 @@ return [
     // ...
 ];
 ```
-Create a config array entry/file.
+Create a config array entry/file. You can add a client so the docs page can authorize and test your endpoints.
 ```php
 <?php
 
 return [
     'docs' => 'data/docs/api.json',
+    'swaggerClient' => [
+        'clientId' => '',
+        'clientSecret' => '',
+    ],
 ];
+
 ```
 Run booty to deploy the front end assets.
 ```

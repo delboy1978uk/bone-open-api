@@ -13,14 +13,18 @@ class ApiDocsController extends Controller
 {
     /** @var string $docJsonPath */
     private $docJsonPath;
+    
+    /** @var array $swaggerClientCredentials */
+    private $swaggerClientCredentials;
 
     /**
      * ApiDocsController constructor.
      * @param string $docJsonPath
      */
-    public function __construct(string $docJsonPath)
+    public function __construct(string $docJsonPath, array $swaggerClientCredentials)
     {
         $this->docJsonPath = $docJsonPath;
+        $this->swaggerClientCredentials = $swaggerClientCredentials;
     }
 
     /**
@@ -30,9 +34,18 @@ class ApiDocsController extends Controller
      */
     public function apiDocsAction(ServerRequestInterface $request, array $args): ResponseInterface
     {
-        $body = $this->getView()->render('open-api::docs', []);
+        if ($request->getMethod() === 'GET') {
+            $body = $this->getView()->render('open-api::docs', [
+                'clientId' => $this->swaggerClientCredentials['clientId'],
+                'clientSecret' => $this->swaggerClientCredentials['clientSecret'],
+            ]);
+            $response = new HtmlResponse($body);
+        } else {
+            $body = $request->getParsedBody();
+            $response = new JsonResponse($body);
+        }
 
-        return new HtmlResponse($body);
+        return $response;
     }
     
     /**

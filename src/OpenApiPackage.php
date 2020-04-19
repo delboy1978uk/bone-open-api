@@ -30,8 +30,12 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
 
         $c[ApiDocsController::class] = $c->factory(function (Container $c) {
             $docJsonPath = $c->has('docs') ? $c->get('docs') : 'data/docs/api.json';
-            
-            return  Init::controller(new ApiDocsController($docJsonPath), $c);
+            $swaggerClientCredentials = $c->has('swaggerClient') ? $c->get('swaggerClient') : [
+                'clientId' => '',
+                'clientSecret' => '',
+            ];
+
+            return  Init::controller(new ApiDocsController($docJsonPath, $swaggerClientCredentials), $c);
         });
     }
 
