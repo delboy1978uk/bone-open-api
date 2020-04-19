@@ -42,6 +42,7 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
     public function addRoutes(Container $c, Router $router)
     {
         $router->map('GET', '/api/docs', [ApiDocsController::class, 'apiDocsAction']);
+        $router->map('POST', '/api/docs', [ApiDocsController::class, 'apiDocsAction']);
         $router->map('GET', '/api/docs.json', [ApiDocsController::class, 'apiAction']);
     }
 
@@ -67,6 +68,4 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
             'docs' => dirname(__DIR__) . '/data/assets/docs',
         ];
     }
-
-
 }

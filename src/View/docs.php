@@ -90,10 +90,10 @@
         });
 
         ui.initOAuth({
-            clientId: "ceac682a9a4808bf910ad49134230e0e",
-            clientSecret: "JDJ5JDEwJGNEd1J1VEdOY0YxS3QvL0pWQzMxay52",
+            clientId: "f88f6d57ce99cbfeb553b9877ecc5fb5",
+            clientSecret: "JDJ5JDEwJDJGMUZKbGk4Y1pmZ1pOakpCamtiZXVWSWEuNWZESjFhQUtTZWlJUnFqYnF1djNwa0wyV1hp",
             appName: "Bone Framework App",
-            scopeSeparator: " "
+            scopeSeparator: "%20"
         });
 
         window.ui = ui;
