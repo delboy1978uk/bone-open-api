@@ -58,7 +58,6 @@ class DocGeneratorCommand extends Command
             }
         }
 
-
         $openapi = \OpenApi\scan($directories);
         $destination = $input->getArgument('destination');
         $json = $openapi->toJson();
