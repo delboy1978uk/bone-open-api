@@ -53,7 +53,6 @@ class DocGeneratorCommand extends Command
                 $path = implode('/', $explosion);
                 if (is_dir($path)) {
                     $directories[] = $path;
-                    $output->writeln('found path ' . $path);
                 }
             }
         }
