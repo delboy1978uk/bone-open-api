@@ -36,10 +36,10 @@ return [
 ```
 Run booty to deploy the front end assets.
 ```
-booty deploy
+vendor/bin/bone assets:deploy
 ```
 Scan for your API annotations.
 ```
-docs generate
+vendor/bin/bone docs:generate
 ```
 Now you can head to `/api/docs` to view your API documentation. 😃
