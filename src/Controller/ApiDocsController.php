@@ -13,7 +13,7 @@ class ApiDocsController extends Controller
 {
     /** @var string $docJsonPath */
     private $docJsonPath;
-    
+
     /** @var array $swaggerClientCredentials */
     private $swaggerClientCredentials;
 
@@ -39,7 +39,7 @@ class ApiDocsController extends Controller
                 'clientId' => $this->swaggerClientCredentials['clientId'],
                 'clientSecret' => $this->swaggerClientCredentials['clientSecret'],
             ]);
-            $response = new HtmlResponse($body);
+            $response = new HtmlResponse($body, 200, ['layout' => 'none']);
         } else {
             $body = $request->getParsedBody();
             $response = new JsonResponse($body);
@@ -47,7 +47,7 @@ class ApiDocsController extends Controller
 
         return $response;
     }
-    
+
     /**
      * @param ServerRequestInterface $request
      * @param array $args
