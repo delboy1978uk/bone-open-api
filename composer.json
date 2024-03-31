@@ -1,16 +1,16 @@
 {
     "name": "delboy1978uk\/bone-open-api",
-    "description": "OpenApi package for Bone MVC Framework",
+    "description": "OpenApi package for Bone Framework",
     "license": "MIT",
     "authors": [
         {
-            "name": "delboy1978uk@gmail.com",
+            "name": "Derek Stephen McLean",
             "email": "delboy1978uk@gmail.com"
         }
     ],
     "require": {
-        "zircote/swagger-php": "^3.0",
-        "laminas/laminas-diactoros": "^2.0"
+        "zircote/swagger-php": "^4.8.",
+        "laminas/laminas-diactoros": "^3.3"
     },
     "require-dev": {
         "roave\/security-advisories": "dev-master"
