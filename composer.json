@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": "^8.2",
         "zircote/swagger-php": "^4.8.",
         "laminas/laminas-diactoros": "^3.3"
     },
