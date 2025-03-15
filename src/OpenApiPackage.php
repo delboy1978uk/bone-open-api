@@ -8,6 +8,7 @@ use Barnacle\Container;
 use Barnacle\RegistrationInterface;
 use Bone\Console\CommandRegistrationInterface;
 use Bone\Controller\Init;
+use Bone\Http\Middleware\DevOnlyMiddleware;
 use Bone\OpenApi\Console\DocGeneratorCommand;
 use Bone\Router\Router;
 use Bone\Router\RouterConfigInterface;
@@ -16,6 +17,7 @@ use Bone\OpenApi\Controller\ApiDocsController;
 use Bone\Mail\Service\MailService;
 use Bone\User\Controller\BoneUserController;
 use Del\Booty\AssetRegistrationInterface;
+use League\Route\RouteGroup;
 
 class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, CommandRegistrationInterface, AssetRegistrationInterface
 {
@@ -45,9 +47,12 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
      */
     public function addRoutes(Container $c, Router $router)
     {
-        $router->map('GET', '/api/docs', [ApiDocsController::class, 'apiDocsAction']);
-        $router->map('POST', '/api/docs', [ApiDocsController::class, 'apiDocsAction']);
-        $router->map('GET', '/api/docs.json', [ApiDocsController::class, 'apiAction']);
+        $devOnly = new DevOnlyMiddleware();
+        $router->group('/api', function (RouteGroup $route) {
+            $route->map('GET', '/docs', [ApiDocsController::class, 'apiDocsAction']);
+            $route->map('POST', '/docs', [ApiDocsController::class, 'apiDocsAction']);
+            $route->map('GET', '/docs/open-api', [ApiDocsController::class, 'apiAction']);
+        })->middleware($devOnly);
     }
 
     /**
