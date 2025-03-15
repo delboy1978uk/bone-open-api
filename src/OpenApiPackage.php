@@ -21,10 +21,7 @@ use League\Route\RouteGroup;
 
 class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, CommandRegistrationInterface, AssetRegistrationInterface
 {
-    /**
-     * @param Container $c
-     */
-    public function addToContainer(Container $c)
+    public function addToContainer(Container $c): void
     {
         /** @var ViewEngine $viewEngine */
         $viewEngine = $c->get(ViewEngine::class);
@@ -41,11 +38,7 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
         });
     }
 
-    /**
-     * @param Container $c
-     * @param Router $router
-     */
-    public function addRoutes(Container $c, Router $router)
+    public function addRoutes(Container $c, Router $router): void
     {
         $devOnly = new DevOnlyMiddleware();
         $router->group('/api', function (RouteGroup $route) {
@@ -55,10 +48,6 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
         })->middleware($devOnly);
     }
 
-    /**
-     * @param Container $container
-     * @return array
-     */
     public function registerConsoleCommands(Container $container): array
     {
         $packages = $container->get('packages');
@@ -68,9 +57,6 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
         return [$command];
     }
 
-    /**
-     * @return array
-     */
     public function getAssetFolders(): array
     {
         return [
