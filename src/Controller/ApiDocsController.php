@@ -3,10 +3,13 @@
 namespace Bone\OpenApi\Controller;
 
 use Bone\Controller\Controller;
+use Bone\Exception;
+use Bone\Http\Response\YamlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
+use function strpos;
 
 class ApiDocsController extends Controller
 {
@@ -37,9 +40,19 @@ class ApiDocsController extends Controller
 
     public function apiAction(ServerRequestInterface $request, array $args): ResponseInterface
     {
-        $json = file_get_contents($this->docPath);
-        $data = json_decode($json, true);
+        $contents = file_get_contents($this->docPath);
+//die(var_dump(strpos($this->docPath, '.yaml') ));
+        if (strpos($this->docPath, '.json') !== false) {
+            $data = json_decode($json, true);
 
-        return new JsonResponse($data);
+            return new JsonResponse($data);
+        } elseif (
+            strpos($this->docPath, '.yaml') !== false
+            || strpos($this->docPath, '.yml') !== false
+        ) {
+            return new YamlResponse($contents);
+        }
+
+        return new Exception(Exception::LOST_AT_SEA);
     }
 }
