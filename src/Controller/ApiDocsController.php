@@ -41,7 +41,7 @@ class ApiDocsController extends Controller
     public function apiAction(ServerRequestInterface $request, array $args): ResponseInterface
     {
         $contents = file_get_contents($this->docPath);
-//die(var_dump(strpos($this->docPath, '.yaml') ));
+
         if (strpos($this->docPath, '.json') !== false) {
             $data = json_decode($json, true);
 
