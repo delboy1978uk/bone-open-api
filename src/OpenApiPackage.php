@@ -9,13 +9,11 @@ use Barnacle\RegistrationInterface;
 use Bone\Console\CommandRegistrationInterface;
 use Bone\Controller\Init;
 use Bone\Http\Middleware\DevOnlyMiddleware;
-use Bone\OpenApi\Console\DocGeneratorCommand;
+use Bone\OpenApi\Console\ApiDocSetupCommand;
 use Bone\Router\Router;
 use Bone\Router\RouterConfigInterface;
 use Bone\View\ViewEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
-use Bone\Mail\Service\MailService;
-use Bone\User\Controller\BoneUserController;
 use Del\Booty\AssetRegistrationInterface;
 use League\Route\RouteGroup;
 
@@ -51,10 +49,9 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
     public function registerConsoleCommands(Container $container): array
     {
         $packages = $container->get('packages');
-        $command = new DocGeneratorCommand($packages);
-        $command->setName('docs:generate');
+        $apiSetup = new ApiDocSetupCommand($packages);
 
-        return [$command];
+        return [$apiSetup];
     }
 
     public function getAssetFolders(): array

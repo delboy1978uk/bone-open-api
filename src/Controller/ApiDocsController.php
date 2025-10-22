@@ -43,16 +43,18 @@ class ApiDocsController extends Controller
         $contents = file_get_contents($this->docPath);
 
         if (strpos($this->docPath, '.json') !== false) {
-            $data = json_decode($json, true);
+            $data = json_decode($contents, true);
 
             return new JsonResponse($data);
-        } elseif (
+        }
+
+        if (
             strpos($this->docPath, '.yaml') !== false
             || strpos($this->docPath, '.yml') !== false
         ) {
             return new YamlResponse($contents);
         }
 
-        return new Exception(Exception::LOST_AT_SEA);
+        throw new Exception(Exception::LOST_AT_SEA);
     }
 }

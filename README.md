@@ -1,5 +1,5 @@
 # openapi
-OpenApi package for Bone Mvc Framework
+OpenApi package for Bone Framework
 ## installation
 Use Composer
 ```

@@ -1,5 +1,5 @@
 {
-    "name": "delboy1978uk\/bone-open-api",
+    "name": "delboy1978uk/bone-open-api",
     "description": "OpenApi package for Bone Framework",
     "license": "MIT",
     "authors": [
@@ -10,11 +10,10 @@
     ],
     "require": {
         "php": "^8.2",
-        "zircote/swagger-php": "^4.8.",
         "laminas/laminas-diactoros": "^3.3"
     },
     "require-dev": {
-        "roave\/security-advisories": "dev-master"
+        "roave\/security-advisories": "dev-latest"
     },
     "bin": [
         "bin/docs"
