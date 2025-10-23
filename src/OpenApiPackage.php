@@ -10,6 +10,7 @@ use Bone\Console\CommandRegistrationInterface;
 use Bone\Controller\Init;
 use Bone\Http\Middleware\DevOnlyMiddleware;
 use Bone\OpenApi\Console\ApiDocSetupCommand;
+use Bone\OpenApi\Console\UpdateVendorsCommand;
 use Bone\Router\Router;
 use Bone\Router\RouterConfigInterface;
 use Bone\OpenApi\Controller\ApiDocsController;
@@ -48,9 +49,10 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
     public function registerConsoleCommands(Container $container): array
     {
         $packages = $container->get('packages');
-        $apiSetup = new ApiDocSetupCommand($packages);
+        $apiSetup = new ApiDocSetupCommand($packages, 'docs:setup');
+        $vendorUpdate = new UpdateVendorsCommand($packages, 'docs:vendor-update');
 
-        return [$apiSetup];
+        return [$apiSetup, $vendorUpdate];
     }
 
     public function getAssetFolders(): array

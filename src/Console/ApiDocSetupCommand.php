@@ -3,7 +3,6 @@
 namespace Bone\OpenApi\Console;
 
 use Bone\Console\Command;
-use Bone\Contracts\Container\ApiDocProviderInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -14,14 +13,8 @@ use function file_get_contents;
 use function file_put_contents;
 use function is_dir;
 
-class ApiDocSetupCommand extends Command
+class ApiDocSetupCommand extends AbstractVendorUpdateCommand
 {
-    public function __construct(
-        private array $packages,
-    ) {
-        parent::__construct('docs:setup');
-    }
-
     protected function configure(): void
     {
         $this->setDescription('Sets up a node project for Typespec API definitions');
@@ -98,48 +91,5 @@ class ApiDocSetupCommand extends Command
         } else {
             $io->warning('Directory ' . $path . ' already exists.');
         }
-    }
-
-    private function importPackageDefinitions(SymfonyStyle $io): void
-    {
-        $modelsTypeSpec = $routesTypeSpec = "// this file is auto-generated, do not edit it.\n";
-
-        foreach ($this->packages as $package) {
-            $instance = new $package();
-            $info = [];
-
-            if ($instance instanceof ApiDocProviderInterface) {
-                $info[] = 'Adding ' . $package . ' docs..';
-                $models = $instance->provideModels();
-
-                foreach ($models as $model) {
-                    $modelsTypeSpec .= 'import "' . $model . '";' . "\n";
-                }
-
-                $routes = $instance->provideRoutes();
-
-                foreach ($routes as $route) {
-                    $routesTypeSpec .= 'import "' . $route . '";' . "\n";
-                }
-            }
-
-            $info ? $io->info($info) : null;
-        }
-
-        $modelFile = 'spec/models/vendors.tsp';
-        $routeFile = 'spec/vendors.tsp';
-
-        if (file_exists($modelFile)) {
-            unlink($modelFile);
-        }
-
-        if (file_exists($routeFile)) {
-            unlink($routeFile);
-        }
-
-        file_put_contents($modelFile, $modelsTypeSpec);
-        file_put_contents($routeFile, $routesTypeSpec);
-        $io->info(['auto-generating files..', $modelFile, $routeFile]);
-        $io->success('Setup complete.');
     }
 }
