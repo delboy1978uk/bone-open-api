@@ -12,8 +12,8 @@ use Bone\Http\Middleware\DevOnlyMiddleware;
 use Bone\OpenApi\Console\ApiDocSetupCommand;
 use Bone\Router\Router;
 use Bone\Router\RouterConfigInterface;
-use Bone\View\ViewEngine;
 use Bone\OpenApi\Controller\ApiDocsController;
+use Bone\View\ViewEngineInterface;
 use Del\Booty\AssetRegistrationInterface;
 use League\Route\RouteGroup;
 
@@ -21,12 +21,11 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
 {
     public function addToContainer(Container $c): void
     {
-        /** @var ViewEngine $viewEngine */
-        $viewEngine = $c->get(ViewEngine::class);
+        $viewEngine = $c->get(ViewEngineInterface::class);
         $viewEngine->addFolder('open-api', __DIR__ . '/View/');
 
         $c[ApiDocsController::class] = $c->factory(function (Container $c) {
-            $docJsonPath = $c->has('docs') ? $c->get('docs') : 'data/docs/api.json';
+            $docJsonPath = $c->has('docs') ? $c->get('docs') : 'data/docs/openapi.yaml';
             $swaggerClientCredentials = $c->has('swaggerClient') ? $c->get('swaggerClient') : [
                 'clientId' => '',
                 'clientSecret' => '',

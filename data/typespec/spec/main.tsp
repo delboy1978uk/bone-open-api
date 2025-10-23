@@ -10,9 +10,9 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 
 @service(#{
-  title: "Test",
+  title: "Bone Framework API",
 })
-@server("/api", "test")
+@server("/api", "API")
 //@useAuth(BearerAuth)
 namespace Application;
 

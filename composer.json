@@ -10,14 +10,12 @@
     ],
     "require": {
         "php": "^8.2",
+        "boneframework/contracts": "v1.5",
         "laminas/laminas-diactoros": "^3.3"
     },
     "require-dev": {
         "roave\/security-advisories": "dev-latest"
     },
-    "bin": [
-        "bin/docs"
-    ],
     "autoload": {
         "psr-4": {
             "Bone\\OpenApi\\": "src\/"
