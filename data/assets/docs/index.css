@@ -1,0 +1,28 @@
+html {
+    box-sizing: border-box;
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    background: #fafafa;
+}
+.topbar-wrapper .link:after {
+    content: 'bone docs';
+    padding-left: 10px;
+}
+.topbar-wrapper a.link svg{
+    display: none;
+}
+
+.topbar-wrapper .link:before {
+    height: 40px;
+    content: url('/img/skull_and_crossbones_small.png');
+}
