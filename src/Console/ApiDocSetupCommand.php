@@ -3,6 +3,7 @@
 namespace Bone\OpenApi\Console;
 
 use Bone\Console\Command;
+use Bone\Contracts\Container\ApiDocProviderInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -31,8 +32,6 @@ class ApiDocSetupCommand extends Command
     {
         $io = $this->getIO($input, $output);
         $io->title('☠️  Setup API definitions');
-        $this->createFile($io, 'package.json');
-        $this->createFile($io, 'tspconfig.yaml');
         $this->createSpecFolderAndFiles($io);
         $this->importPackageDefinitions($io);
 
@@ -71,6 +70,8 @@ class ApiDocSetupCommand extends Command
         }
 
         $files = [
+            'package.json',
+            'tspconfig.yaml',
             'spec/main.tsp',
             'spec/models/common.tsp',
             'spec/models/index.tsp',
@@ -104,11 +105,13 @@ class ApiDocSetupCommand extends Command
         $directories = [];
 
         foreach ($this->packages as $package) {
-            $io->info('Checking ' . $package . '..');
+            $instance = new $package();
 
-
+            if ($instance instanceof ApiDocProviderInterface) {
+                $io->info('Checking ' . $package . '..');
+            }
         }
 
-        $io->writeln('');
+        $io->success('Setup complete.');
     }
 }
