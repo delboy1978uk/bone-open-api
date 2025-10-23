@@ -6,6 +6,8 @@ import "./models/index.tsp";
 import "./responses/index.tsp";
 import "./payloads/index.tsp";
 
+import "./vendors.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -13,6 +15,16 @@ using TypeSpec.Rest;
   title: "Bone Framework API",
 })
 @server("/api", "API")
-//@useAuth(BearerAuth)
+
+@useAuth(
+  OAuth2Auth<[{
+   type: OAuth2FlowType.clientCredentials;
+   tokenUrl: "/oauth2/token";
+   refreshUrl: "/oauth2/refresh";
+   scopes: ["basic"];
+ }]>
+)
 namespace Application;
+
+// add routes here!
 
