@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "type": "module",
   "devDependencies": {
-    "@typespec/compiler": "^1.1.0",
-    "@typespec/http": "^1.1.0",
-    "@typespec/openapi3": "^1.1.0",
-    "@typespec/rest": "^0.71.0",
-    "@typespec/versioning": "^0.71.0"
+    "@typespec/compiler": "^1.5.0",
+    "@typespec/http": "^1.5.0",
+    "@typespec/openapi3": "^1.5.0",
+    "@typespec/rest": "^0.75.0",
+    "@typespec/versioning": "^0.75.0"
   },
   "private": true,
   "scripts": {
