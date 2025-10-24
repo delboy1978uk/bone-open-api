@@ -82,7 +82,7 @@ abstract class AbstractVendorUpdateCommand extends Command
         file_put_contents($routeFile, $routesTypeSpec);
         file_put_contents($payloadsFile, $payloadsTypeSpec);
         file_put_contents($responsesFile, $responsesTypeSpec);
-        $io->info(['auto-generating files..', $modelFile, $routeFile]);
+        $io->info(['auto-generating files..', $modelFile, $routeFile, $payloadsFile, $responsesFile]);
         $io->success([
             'Setup complete, please install using pnpm|npm|yarn. To compile docs, run',
             'pnpm run docs',
