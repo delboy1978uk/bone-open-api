@@ -21,7 +21,7 @@ abstract class AbstractVendorUpdateCommand extends Command
 
     protected function importPackageDefinitions(SymfonyStyle $io): void
     {
-        $modelsTypeSpec = $routesTypeSpec = "// this file is auto-generated, do not edit it.\n";
+        $modelsTypeSpec = $routesTypeSpec = $payloadsTypeSpec = $responsesTypeSpec = "// this file is auto-generated, do not edit it.\n";
 
         foreach ($this->packages as $package) {
             $instance = new $package();
@@ -40,6 +40,18 @@ abstract class AbstractVendorUpdateCommand extends Command
                 foreach ($routes as $route) {
                     $routesTypeSpec .= 'import "' . $route . '";' . "\n";
                 }
+
+                $responses = $instance->provideResponses();
+
+                foreach ($responses as $response) {
+                    $responsesTypeSpec .= 'import "' . $response . '";' . "\n";
+                }
+
+                $payloads = $instance->providePayloads();
+
+                foreach ($payloads as $payload) {
+                    $payloadsTypeSpec .= 'import "' . $payload . '";' . "\n";
+                }
             }
 
             $info ? $io->info($info) : null;
@@ -47,6 +59,8 @@ abstract class AbstractVendorUpdateCommand extends Command
 
         $modelFile = 'spec/models/vendors.tsp';
         $routeFile = 'spec/vendors.tsp';
+        $responsesFile = 'spec/responses/vendors.tsp';
+        $payloadsFile = 'spec/payloads/vendors.tsp';
 
         if (file_exists($modelFile)) {
             unlink($modelFile);
@@ -56,8 +70,18 @@ abstract class AbstractVendorUpdateCommand extends Command
             unlink($routeFile);
         }
 
+        if (file_exists($responsesFile)) {
+            unlink($responsesFile);
+        }
+
+        if (file_exists($payloadsFile)) {
+            unlink($payloadsFile);
+        }
+
         file_put_contents($modelFile, $modelsTypeSpec);
         file_put_contents($routeFile, $routesTypeSpec);
+        file_put_contents($payloadsFile, $payloadsTypeSpec);
+        file_put_contents($responsesFile, $responsesTypeSpec);
         $io->info(['auto-generating files..', $modelFile, $routeFile]);
         $io->success([
             'Setup complete, please install using pnpm|npm|yarn. To compile docs, run',

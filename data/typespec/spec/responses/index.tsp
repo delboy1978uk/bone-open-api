@@ -1,4 +1,5 @@
 import "./errors.tsp";
+import "./vendors.tsp";
 import "../models/common.tsp";
 
 using TypeSpec.Http;
