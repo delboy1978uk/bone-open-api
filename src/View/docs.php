@@ -15,6 +15,35 @@
 <div id="swagger-ui"></div>
 <script src="/docs/swagger-ui-bundle.js" charset="UTF-8"> </script>
 <script src="/docs/swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
-<script src="/docs/swagger-initializer.js" charset="UTF-8"> </script>
+<script type="application/javascript" charset="UTF-8">
+    window.onload = function() {
+
+        // the following lines will be replaced by docker/configurator, when it runs in a docker-container
+        const ui = SwaggerUIBundle({
+            url: "/api/docs/open-api",
+            dom_id: '#swagger-ui',
+            deepLinking: true,
+            presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIStandalonePreset
+            ],
+            plugins: [
+                SwaggerUIBundle.plugins.DownloadUrl
+            ],
+            layout: "StandaloneLayout"
+        });
+
+        ui.initOAuth({
+            clientId: "<?= $clientId ?>",
+            clientSecret: "<?= $clientSecret ?>",
+            appName: "Bone Framework App",
+            scopeSeparator: " ",
+            scopes: "basic"
+        });
+
+        window.ui = ui;
+    };
+
+</script>
 </body>
 </html>
