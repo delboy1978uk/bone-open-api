@@ -63,6 +63,7 @@ class ApiDocSetupCommand extends AbstractVendorUpdateCommand
         }
 
         $files = [
+            '.nvmrc',
             'package.json',
             'tspconfig.yaml',
             'spec/main.tsp',

@@ -2,9 +2,9 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/openapi3";
 
-import "./models/index.tsp";
 import "./responses/index.tsp";
 import "./payloads/index.tsp";
+import "./models/index.tsp";
 
 import "./vendors.tsp";
 
