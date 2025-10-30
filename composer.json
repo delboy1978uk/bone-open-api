@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "boneframework/contracts": "v1.5",
+        "boneframework/contracts": "^1.6",
         "laminas/laminas-diactoros": "^3.3"
     },
     "require-dev": {
