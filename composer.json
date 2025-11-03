@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "boneframework/contracts": "^1.6",
+        "delboy1978uk/bone-oauth2": "^1.9",
         "laminas/laminas-diactoros": "^3.3"
     },
     "require-dev": {
