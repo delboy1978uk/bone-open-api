@@ -21,7 +21,7 @@ class ApiDocSetupCommand extends AbstractVendorUpdateCommand
         $this->setHelp('Sets up a node project for Typespec API definitions');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = $this->getIO($input, $output);
         $io->title('☠️  Setup API definitions');

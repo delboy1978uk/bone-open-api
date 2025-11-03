@@ -14,7 +14,7 @@ class UpdateVendorsCommand extends AbstractVendorUpdateCommand
         $this->setHelp('Regenerate the vendors.tsp Typespec files for vendor packages');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = $this->getIO($input, $output);
         $io->title('☠️  Update vendor API definitions');
