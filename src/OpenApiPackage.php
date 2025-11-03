@@ -7,6 +7,7 @@ namespace Bone\OpenApi;
 use Barnacle\Container;
 use Barnacle\RegistrationInterface;
 use Bone\Console\CommandRegistrationInterface;
+use Bone\Contracts\Container\DefaultSettingsProviderInterface;
 use Bone\Controller\Init;
 use Bone\Http\Middleware\DevOnlyMiddleware;
 use Bone\OpenApi\Console\ApiDocSetupCommand;
@@ -18,7 +19,8 @@ use Bone\View\ViewEngineInterface;
 use Del\Booty\AssetRegistrationInterface;
 use League\Route\RouteGroup;
 
-class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, CommandRegistrationInterface, AssetRegistrationInterface
+class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, CommandRegistrationInterface,
+                                AssetRegistrationInterface, DefaultSettingsProviderInterface
 {
     public function addToContainer(Container $c): void
     {
@@ -61,4 +63,11 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
             'docs' => dirname(__DIR__) . '/data/assets/docs',
         ];
     }
+
+    public function getSettingsFileName(): string
+    {
+        return __DIR__ . '/../data/config/bone-open-api.php';
+    }
+
+
 }
