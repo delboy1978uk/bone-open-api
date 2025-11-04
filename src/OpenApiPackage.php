@@ -81,7 +81,8 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
     {
         $io->writeln('Setting up Swagger Client');
         $config = file_get_contents($this->getSettingsFileName());
-        $em = Application::ahoy()->getContainer()->get(EntityManagerInterface::class);
+        $container = Application::ahoy()->bootstrap();
+        $em = $container->get(EntityManagerInterface::class);
         $swaggerClient = $em->getRepository(Client::class)->findOneBy(['name' => 'API Docs']);
         $id = $swaggerClient->getIdentifier();
         $secret = $swaggerClient->getSecret();
@@ -109,6 +110,8 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
             'Bone\Paseto\PasetoPackage',
             'Del\Person\PersonPackage',
             'Del\UserPackage',
+            'Del\Passport\PassportPackage',
+            'Bone\Passport\PassportPackage',
             'Bone\User\BoneUserPackage',
             'Bone\OAuth2\BoneOAuth2Package',
             self::class,
