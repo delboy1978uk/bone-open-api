@@ -27,10 +27,20 @@ model DeletedReturn {
 
 model SuccessReturn {
   @statusCode statusCode: 200;
-  @body body: {
-    message: string;
-  };
 }
+
+model OkApiResponse {
+    @statusCode statusCode: 200;
+}
+
+model FileResponse {
+    @statusCode statusCode: 200;
+    ...File
+}
+
+model CreatedApiResponse {
+    @statusCode statusCode: 201;
+};
 
 alias IndexResponse<T> = HalCollection<T> | NotFoundError;
 alias CreatedResponse<T> = CreatedReturn<HalRecord<T>> | ValidationError;
@@ -38,4 +48,4 @@ alias UpdatedResponse<T> = UpdatedReturn<HalRecord<T>> | ValidationError;
 alias DeletedResponse = DeletedReturn;
 alias RecordResponse<T> = RecordReturn<HalRecord<T>> | NotFoundError;
 alias ReadResponse<T> = T | NotFoundError;
-alias SuccessResponse = SuccessReturn | ValidationError | BadRequestError;
+alias SuccessResponse<T> = T | RecordReturn<T> | SuccessReturn | ValidationError | BadRequestError;
