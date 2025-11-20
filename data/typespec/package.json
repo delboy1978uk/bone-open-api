@@ -7,10 +7,12 @@
     "@typespec/http": "^1.5.0",
     "@typespec/openapi3": "^1.5.0",
     "@typespec/rest": "^0.75.0",
-    "@typespec/versioning": "^0.75.0"
+    "@typespec/versioning": "^0.75.0",
+    "orval": "^8.0"
   },
   "private": true,
   "scripts": {
-    "docs": "tsp compile ./spec"
+    "docs": "tsp compile ./spec",
+    "orval": "orval"
   }
 }

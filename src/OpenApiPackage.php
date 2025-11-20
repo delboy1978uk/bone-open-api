@@ -96,6 +96,8 @@ class OpenApiPackage implements RegistrationInterface, RouterConfigInterface, Co
 
         $io->writeln('Setting up a Typespec project');
         $command->runProcess($io, ['bone', 'docs:setup']);
+        $orvalConfig = file_get_contents(__DIR__ . '/../data/typespec/orval.config.js');
+        file_put_contents(__DIR__ . '/../../../../orval.config.js');
 
         $io->success(['Typespec project has been installed.',]);
         $io->warning(['Please run `pnpm install` (or npm, or yarn) to setup the Node project']);
